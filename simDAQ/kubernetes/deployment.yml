@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: simdaq-service
+spec:
+  selector:
+    app: simdaq
+  ports:
+  - protocol: "TCP"
+    # Port accessible inside cluster
+    port: 6000
+    # Port to forward to inside the pod
+    targetPort: 5000
+  # type: LoadBalancer
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simdaq-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simdaq
+  template:
+    metadata:
+      labels:
+        app: simdaq
+    spec:
+      containers:
+      - name: simdaq
+        image: sticksword/simdaq:0.1
+        ports:
+        - containerPort: 5000
