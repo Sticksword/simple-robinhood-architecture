@@ -31,6 +31,6 @@ spec:
     spec:
       containers:
       - name: simdaq
-        image: sticksword/simdaq:0.1
+        image: sticksword/simdaq:0.2
         ports:
         - containerPort: 5000

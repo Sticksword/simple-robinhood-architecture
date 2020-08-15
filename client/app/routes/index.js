@@ -27,7 +27,9 @@ export default class IndexRoute extends Route {
   }
 
   getRecentPrices() {
-    var url = new URL('http://localhost:5000/stocks');
+    // [TODO] add toggle logic to some service level code to switch between dev and deployed/kube environments
+    // var url = new URL('http://localhost:5000/stocks');
+    var url = new URL('http://' + window.location.hostname + '/stocks');
     const params = {
       tickers: Object.keys(this.recentPrices),
     };
@@ -64,7 +66,7 @@ export default class IndexRoute extends Route {
 
     // console.log(this.recentPrices);
     console.log('fetched');
-    later(this, this.getRecentPrices, 2000);
+    later(this, this.getRecentPrices, 1100);
   }
 
   model() {

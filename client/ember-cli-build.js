@@ -5,6 +5,13 @@ const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
     // Add options here
+
+    // can include libs via https://github.com/adopted-ember-addons/ember-cli-sass
+    sassOptions: {
+      includePaths: [
+        'node_modules/bootstrap/scss'
+      ]
+    },
   });
 
   // Use `app.import` to add additional libraries to the generated

@@ -6,10 +6,16 @@ Running in plain old terminal process:
 pipenv run python server/main.py
 ```
 
+To view available routes:
+
+``` bash
+FLASK_APP=server/main.py pipenv run flask routes
+```
+
 To build a docker container:
 
 ``` bash
-docker build -f docker/Dockerfile --tag simdaq:0.1 .
+docker build -f docker/Dockerfile --tag sticksword/simdaq:0.1 .
 ```
 
 [Dockerfile reference](https://docs.docker.com/engine/reference/builder/)

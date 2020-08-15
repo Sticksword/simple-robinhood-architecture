@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+import requests
 
 app = Flask(__name__,
             static_url_path='')
@@ -14,11 +15,19 @@ def hello_world():
 
 @app.route('/stocks', methods=['GET'])
 def tickers():
-  tickers = request.args.get('tickers').split(',')
-  print(tickers)
-  return jsonify([
-    { 'ticker': 'TSLA', 'price': 1000 },
-  ])
+  simdaq_endpoint = 'http://simdaq-service:6000/stocks'
+  # local version [TODO] move this manual logic into some initializer code
+  # simdaq_endpoint = 'http://localhost:5001/stocks'
+
+  # tickers = request.args.get('tickers').split(',')
+  # print('fetching: ', tickers)
+  payload = { 'tickers': request.args.get('tickers') }
+  response = requests.get(simdaq_endpoint, params=payload)
+  
+  if response.status_code == 200:
+    return response.json()
+  else:
+    return jsonify({ 'error': 'something blew up internally'})
 
 '''
 provides same functionality as `rake routes`

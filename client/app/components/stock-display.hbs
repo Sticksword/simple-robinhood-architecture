@@ -1,4 +1,7 @@
-{{ @ticker }} - {{ @price }}
+<div class="stock-display">
+  <h2>{{ @ticker }}</h2>
+  <div class="{{this.changeStatus}} stock-display-price">{{ @price }}</div>
+</div>
 
 {{!-- {{#each @prices as |price|}}
   {{price.y}}

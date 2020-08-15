@@ -24,13 +24,18 @@ def updateTickers():
 
 updateTickers()
 
-@stocks_blueprint.route('/', methods=['GET'])
-def all_books():
+@stocks_blueprint.route('', methods=['GET'])
+def get_tickers():
   response_object = {
     'status': 'success',
     'container_id': os.uname()[1]
   }
   response_object['ticker_prices'] = []
+
+  # [TODO] move to some kind of controller param check (similar to rails require_params)
+  if not request.args.get('tickers'):
+    return jsonify(response_object)
+
   tickers = request.args.get('tickers').split(',')
   # print(TICKERS)
   

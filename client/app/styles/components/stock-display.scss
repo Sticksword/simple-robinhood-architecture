@@ -1,0 +1,28 @@
+.stock-display {
+  border-bottom: .5px solid gray;
+  padding: 8px;
+}
+
+.stock-display:last-child {
+  border-bottom: none;
+}
+
+.stock-display-price {
+  padding: 8px 20px;
+}
+
+.red {
+  color: red;
+
+  &::after {
+    content: '↓';
+  }
+}
+
+.green {
+  color: green;
+
+  &::after {
+    content: '↑';
+  }
+}

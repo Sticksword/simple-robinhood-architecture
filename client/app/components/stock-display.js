@@ -3,12 +3,26 @@ import { later } from '@ember/runloop';
 import { tracked } from '@glimmer/tracking';
 
 export default class StockDisplayComponent extends Component {
+  _priorValue = null;
+
   // TIL glimmer component args (eg. this.args.price) are automatically tracked, so there is no need to annotate them
   constructor() {
     super(...arguments);
 
     // if we want to track historical data, currently not going to do - too much scope creep
     // this.updateGraph();
+  }
+
+  get changeStatus() {
+    var changeStatus;
+    if (this._priorValue) {
+      changeStatus = (this._priorValue > this.args.price ? 'red' : 'green');
+    } else {
+      changeStatus = '';
+    }
+    this._priorValue = this.args.price;
+
+    return changeStatus;
   }
 
   @tracked graphData = {

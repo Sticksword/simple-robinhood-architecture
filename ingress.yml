@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: example-robinhood-ingress
+  annotations:
+    # https://kubernetes.github.io/ingress-nginx/examples/rewrite/#rewrite-target
+    # https://stackoverflow.com/questions/56989555/angular-on-kubernetes-ingress-routing
+    # nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  rules:
+  # if we had actual domain
+  # https://kubernetes.io/docs/concepts/services-networking/ingress/
+  # - host: budget-robinhood.info
+  #   http:
+  #     paths:
+  #     - path: /
+  #       backend:
+  #         serviceName: budget-robinhood-server
+  #         servicePort: 6000 # the port value for a k8 service
+  - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: budget-robinhood-server
+          servicePort: 6000

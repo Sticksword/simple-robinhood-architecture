@@ -1,3 +1,11 @@
-{{#each-in @model as |ticker price|}}
-  <StockDisplay @ticker={{ticker}} @price={{price}} />
-{{/each-in}}
+
+<div class="container-cover">
+  <div class="container-column">
+    <h1>Trading made easy.</h1>
+  </div>
+  <div class="container-column">
+    {{#each-in @model as |ticker price|}}
+      <StockDisplay @ticker={{ticker}} @price={{price}} />
+    {{/each-in}}
+  </div>
+</div>
